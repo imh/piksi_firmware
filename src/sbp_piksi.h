@@ -54,6 +54,7 @@
 
 #define MSG_RESET_FILTERS           0x22  /**< Host   -> Piksi */
 #define MSG_INIT_BASE               0x23  /**< Host   -> Piksi */
+#define MSG_CYCLE_SLIP              0x24  /**< Host   -> Piksi */
 
 #define MSG_SETTINGS                0xA0  /**< Host  <-> Piksi */
 #define MSG_SETTINGS_SAVE           0xA1  /**< Host   -> Piksi */

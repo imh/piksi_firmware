@@ -219,6 +219,8 @@ int main(void)
   settings_setup();
   usarts_setup();
 
+  cycle_slip_callback_register();
+
   check_nap_auth();
 
   static char nap_version_string[64] = {0};

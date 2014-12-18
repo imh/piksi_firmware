@@ -191,6 +191,30 @@ void tracking_channel_get_corrs(u8 channel)
   }
 }
 
+void cycle_slip_callback(u16 sender_id, u8 len, u8 msg[], void* context)
+{
+  if (len == 2) {
+    u8 chan = msg[0];
+    s8 cycles = (s8)msg[1];
+    tracking_channel[chan].carrier_phase += (s64)cycles << 24;
+  }
+  
+  (void) sender_id;
+  (void) len;
+  (void) context;
+}
+
+void cycle_slip_callback_register(void)
+{
+  static sbp_msg_callbacks_node_t cycle_slip_node;
+
+  sbp_register_cbk(
+    MSG_CYCLE_SLIP,
+    &cycle_slip_callback,
+    &cycle_slip_node
+  );
+}
+
 /** Update tracking channels after the end of an integration period.
  * Update update_count, sample_count, TOW, run loop filters and update
  * SwiftNAP tracking channel frequencies.
